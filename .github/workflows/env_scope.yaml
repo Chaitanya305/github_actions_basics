@@ -1,0 +1,36 @@
+name: this is to check env scope
+
+on:
+  workflow_dispatch:
+
+env:
+  workflow_var: workflow_var
+
+jobs:
+  job-1:
+    runs-on: ubuntu-24.04
+    env:
+      job_env: job_env
+    steps:
+      - name: job 1 step 1
+        env:
+          step_var: step_var
+        run: |
+          echo "thi is workflow var: $workflow_var"
+          echo "this is job var: $job_env"
+          echo "this is step var: $step_var"
+      
+      - name: job 1 step 2
+        run: |
+          echo "thi is workflow var: $workflow_var"
+          echo "this is job var: $job_env"
+          echo "this is step var: $step_var"
+        
+  job-2:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: job 2 step 1
+        run: |
+          echo "thi is workflow var: $workflow_var"
+          echo "this is job var: $job_env"
+          echo "this is step var: $step_var"
