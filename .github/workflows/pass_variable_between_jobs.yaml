@@ -19,7 +19,7 @@ jobs:
           echo "foo=$foo" >> "$GITHUB_OUTPUT"
 
           #for github env job scope
-          echp "FOO=$foo" >> "$GITHUB_ENV"
+          echo "FOO=$foo" >> "$GITHUB_ENV"
       - name: check inside producer job
         run: |
           echo "FOO set via github env : $FOO"
