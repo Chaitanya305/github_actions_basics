@@ -1,0 +1,35 @@
+name: passing variable between jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  producer:
+    runs-on: ubuntu-24.04
+
+    outputs:
+      foo: ${{ steps.generate-foo.outputs.foo }}
+    steps:
+      - name: Generate and export foo
+        id: generate-foo
+        run: |
+          foo=bar
+
+          #for job output
+          echo "foo=$foo" >> "$GITHUB_OUTPUT"
+
+          #for github env job scope
+          echp "FOO=$foo" >> "$GITHUB_ENV"
+      - name: check inside producer job
+        run: |
+          echo "FOO set via github env : $FOO"
+          echo "foo step output is  ${{ steps.generate-foo.outputs.foo }}"  
+
+  consumer:
+    runs-on: ubuntu-24.04
+    needs: producer
+    steps:
+      - name: check value inside consumer
+        run: |
+          echo "FOO in cosumer : $FOO"
+          echo "foo value from producer is :  ${{ needs.producer.outputs.foo }}"  
