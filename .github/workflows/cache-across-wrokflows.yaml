@@ -16,9 +16,9 @@ jobs:
           key: demo-cache-v1
       - name: cache not present
         if: steps.get-cache.outputs.cache-hit != 'true'
-        runs: echo "cache is not present"
+        run: echo "cache is not present"
       - name: cache present
         if: steps.get-cache.outputs.cache-hit == 'true'
-        runs: |
+        run: |
           echo "cache is present"
           cat demo-cache/cache.txt
