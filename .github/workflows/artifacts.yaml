@@ -1,0 +1,29 @@
+name: artifacts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate_artifact:
+    name: generate artifacts
+    runs-on: ubuntu-24.04
+    steps:
+      - name: tex-file_create
+        run: echo "hello chaitanya" >> artifact.txt
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: example artifact
+          path: artifact.txt
+
+  use_artifacts:
+    name: consume artifacts
+    runs-on: ubuntu-24.04
+    needs: generate_artifact
+    steps:
+      - name: Dowload artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: example artifact
+      - name: print artifact
+        run: cat artifact.txt
