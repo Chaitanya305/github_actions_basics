@@ -1,0 +1,40 @@
+name: cashe across jobs
+
+on:
+  workflow_dispatch
+
+jobs:
+  load_cache:
+    name: load cache
+    runs-on: ubuntu-24.04
+    steps:
+      - name: check cache
+        id: check-cache
+        uses: actions/cache@v4
+        with:
+          path: demo-cache
+          key: demo-cache-v1
+      - name: update chche if miss
+        if: steps.check-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "cache miss so generating now"
+          mkdir -p demo-cache
+          echo "this is for demo cache" > demo-cache/cache.txt
+      - name: save cache
+        if: steps.check-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v4
+        with:
+          path: demo-cache
+          key: demo-cache-v1
+      - name: verify cache status
+        run: cat demo-cache/cache.txt
+
+  get_cache:
+    runs-on: ubuntu-24.04
+    name: fetch cache in other job
+    steps:
+      - name: get-cache
+        run: cat demo-cache/cache.txt
+
+
+
