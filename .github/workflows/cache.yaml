@@ -27,15 +27,19 @@ jobs:
           path: demo-cache
           key: demo-cache-v1
       - name: verify cache status
-        run: cat demo-cache/cache.txt
+        run: |
+          echo "check cache status ${{ steps.check-cache.outputs.cache-hit }}"
+          cat demo-cache/cache.txt
 
   get_cache:
     runs-on: ubuntu-24.04
     needs: load_cache
     name: fetch cache in other job
     steps:
-      - name: get-cache
+      - name: load-cache
+        uses: actions/cache@v4
+        with:
+          path: demo-cache
+          key: demo-cache-v1
+      - name: get cache
         run: cat demo-cache/cache.txt
-
-
-
