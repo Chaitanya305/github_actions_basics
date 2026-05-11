@@ -34,3 +34,6 @@ jobs:
           echo "running update json script"
           chmod +x update_paramter_json.sh
           ./update_paramter_json.sh ${{ github.event.inputs.tag }} infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
+          echo "##############checking new json ############"
+          cat infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
+
