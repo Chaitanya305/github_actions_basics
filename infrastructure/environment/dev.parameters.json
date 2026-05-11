@@ -1,0 +1,87 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "environmentName": {
+        "value": "prod"
+      },
+      "appName": {
+        "value": "secrets"
+      },
+      "location": {
+        "value": "East US2"
+      },
+      "postgresAdminUsername": {
+        "value": "pgadmin"
+      },
+      "postgresAdminPassword": {
+        "value": ""
+      },
+      "postgresVersion": {
+        "value": "16"
+      },
+      "postgresSkuName": {
+        "value": "Standard_D2s_v3"
+      },
+      "postgresSkuTier": {
+        "value": "GeneralPurpose"
+      },
+      "postgresStorageSizeGB": {
+        "value": 256
+      },
+      "containerAppMinReplicas": {
+        "value": 3
+      },
+      "containerAppMaxReplicas": {
+        "value": 10
+      },
+      "containerAppCpuCores": {
+        "value": "1.0"
+      },
+      "containerAppMemory": {
+        "value": "2Gi"
+      },
+      "containerAppPort": {
+        "value": 8080
+      },
+      "azureTenantId": {
+        "value": "b1c14d5c-3625-45b3-a430-9552373a0c2f"
+      },
+      "azureClientId": {
+        "value": "db996617-7f55-4030-b890-767b7fd15a1c"
+      },
+      "azureClientSecret": {
+        "value": ""
+      },
+      "mainSourceImage": {
+        "value": "cr.sas.com/cdp-release-x64_oci_linux_2-docker-latest/sas-saas-subscription-secrets:<tag>"
+      },
+      "keyVaultName": {
+        "value": "secretssaasprodkv"
+      },
+      "postgresServerName": {
+        "value": "secrets-prod-postgres"
+      },
+      "privateRegistryServer": {
+        "value": "cr.sas.com"
+      },
+      "privateRegistryUsername": {
+        "value": "p-oBtj5iPtH-9T"
+      },
+      "privateRegistryPassword": {
+        "value": ""
+      },
+      "apimIpAddressRange": {
+        "value": "52.226.102.80/29"
+      },
+      "tags": {
+        "value": {
+          "environment": "prod",
+          "application": "secrets",
+          "deployedBy": "bicep",
+          "owner": "itsaasops"
+          
+        }
+      }
+    }
+  }
