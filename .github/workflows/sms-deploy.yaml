@@ -39,5 +39,14 @@ jobs:
           chmod +x update_paramter_json.sh
           ./update_paramter_json.sh ${{ github.event.inputs.tag }} infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
           echo "##############checking new json ############"
-          cat infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: parameter json 
+          path: infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
+      - name: Dowload artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: example artifact
+      
 
