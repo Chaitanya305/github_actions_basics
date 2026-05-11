@@ -30,6 +30,10 @@ jobs:
           fetch-depth: 0
           clean: false
       - name: update paramter file
+        env:
+          POSTGRES_ADMIN_PASSWORD:   ${{ secrets.POSTGRES_ADMIN_PASSWORD }}
+          AZURE_CLIENT_SECRET:       ${{ secrets.AZURE_CLIENT_SECRET }}
+          PRIVATE_REGISTRY_PASSWORD: ${{ secrets.PRIVATE_REGISTRY_PASSWORD }}
         run: | 
           echo "running update json script"
           chmod +x update_paramter_json.sh
