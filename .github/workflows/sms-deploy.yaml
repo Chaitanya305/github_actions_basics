@@ -37,13 +37,12 @@ jobs:
         run: | 
           echo "running update json script"
           chmod +x update_paramter_json.sh
-          ./update_paramter_json.sh ${{ github.event.inputs.tag }} infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
-          echo "##############checking new json ############"
+          ./update_paramter_json.sh ${{ github.event.inputs.tag }} infrastructure/environments/parameters.${{ github.event.inputs.environment }}.json
       - name: upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: parameter json 
-          path: infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
+          path: infrastructure/environments/parameters.${{ github.event.inputs.environment }}.json
       - name: Dowload artifacts
         uses: actions/download-artifact@v4
         with:
