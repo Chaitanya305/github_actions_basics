@@ -1,0 +1,36 @@
+name: this for sms deploy poc
+
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+      tag:
+        description: Image Tag
+        required: true
+        type: string
+
+jobs:
+  update-parameters:
+    name: update paramter.json file
+    runs-on: ubuntu-24.04
+    environment: "${{ github.event.inputs.environment }}"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: "${{ github.ref_name }}"
+          fetch-depth: 0
+          clean: false
+      - name: update paramter file
+        run: | 
+          echo "running update json script"
+          chmod +x update_paramter_json.sh
+          ./update_paramter_json.sh ${{ github.event.inputs.tag }} infrastructure/environment/${{ github.event.inputs.environment }}.parameters.json
