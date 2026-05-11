@@ -1,5 +1,6 @@
-IMAGE_TAG="${1:-}"
-PARAMS_FILE="${2:-parameters.json}"
+IMAGE_TAG="${1}"
+PARAMS_FILE="${2}"
+environment="${3}"
  
 if [[ -z "$IMAGE_TAG" ]]; then
   echo "ERROR: image tag is required. Usage: $0 <image-tag> [parameters.json]"
@@ -31,6 +32,7 @@ jq \
   .parameters.privateRegistryPassword.value = $reg_pass   |
   .parameters.mainSourceImage.value         |= gsub("<tag>"; $tag)
   ' \
-  "$PARAMS_FILE" > "$tmp" && mv "$tmp" "$PARAMS_FILE"
+  "$PARAMS_FILE" > "$tmp" && mv "$tmp" "infrastructure/environments/$environment.parameters.json"
  
-echo "Updated $PARAMS_FILE in-place"
+echo "Updated infrastructure/environments/$environment.parameters.json"
+ls -lrt infrastructure/environments
