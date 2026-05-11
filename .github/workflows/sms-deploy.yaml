@@ -47,6 +47,6 @@ jobs:
       - name: Dowload artifacts
         uses: actions/download-artifact@v4
         with:
-          name: example artifact
+          name: parameter json
       
 
