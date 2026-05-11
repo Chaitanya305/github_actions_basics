@@ -35,4 +35,4 @@ jq \
   "$PARAMS_FILE" > "$tmp" && mv "$tmp" "infrastructure/environments/$environment.parameters.json"
  
 echo "Updated infrastructure/environments/$environment.parameters.json"
-ls -lrt infrastructure/environments
+echo "$(ls -lrt infrastructure/environments)"
